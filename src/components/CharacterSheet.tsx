@@ -96,7 +96,7 @@ export default function CharacterSheet() {
         <div ref={leftRef} className="lg:col-span-5 space-y-12">
           <div 
             ref={imgWrapperRef}
-            className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-[#000] border border-white/5 group shadow-2xl"
+            className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-[#0B0B0F] border border-white/5 group shadow-2xl"
           >
             <div className="dossier-img absolute inset-0 w-[115%] h-[115%] -left-[7.5%] -top-[7.5%]">
               {/* B&W Base */}

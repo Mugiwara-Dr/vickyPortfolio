@@ -147,7 +147,7 @@ export default function Hero() {
         <div ref={cardRef} className="hidden lg:block relative w-full max-w-md aspect-[3/4] group">
            <div 
              ref={imgWrapperRef}
-             className="absolute inset-0 rounded-[40px] overflow-hidden border border-white/5 bg-[#000] shadow-2xl"
+             className="absolute inset-0 rounded-[40px] overflow-hidden border border-white/5 bg-[#0B0B0F] shadow-2xl"
            >
               {/* Technical Overlays */}
               <div className="absolute top-8 left-10 z-20 font-mono text-[8px] text-white/20 uppercase tracking-[0.4em] pointer-events-none">
