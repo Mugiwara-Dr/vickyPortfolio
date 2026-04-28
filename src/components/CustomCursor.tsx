@@ -26,14 +26,14 @@ export default function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const isInteractive = target.tagName.toLowerCase() === "a" || 
-                           target.tagName.toLowerCase() === "button" || 
-                           target.closest("a") || 
-                           target.closest("button");
+      const isInteractive = !!(target.tagName.toLowerCase() === "a" || 
+                               target.tagName.toLowerCase() === "button" || 
+                               target.closest("a") || 
+                               target.closest("button"));
       
-      const isMediaElement = target.tagName.toLowerCase() === "img" || 
-                            target.tagName.toLowerCase() === "video" || 
-                            target.closest(".group"); // Assuming groups are media containers
+      const isMediaElement = !!(target.tagName.toLowerCase() === "img" || 
+                                target.tagName.toLowerCase() === "video" || 
+                                target.closest(".group")); 
 
       setIsHovering(isInteractive);
       setIsMedia(isMediaElement);

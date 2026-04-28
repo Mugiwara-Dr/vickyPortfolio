@@ -53,7 +53,7 @@ const projects = [
 ];
 
 // CLEAN SLIDE — No more bounce
-const cardVariants = {
+const cardVariants: any = {
   enter: (dir: number) => ({
     y: dir > 0 ? 100 : -100,
     opacity: 0,
@@ -80,7 +80,7 @@ const cardVariants = {
   }),
 };
 
-const labelVariants = {
+const labelVariants: any = {
   enter: (dir: number) => ({ y: 10, opacity: 0 }),
   center: {
     y: 0,
