@@ -36,7 +36,7 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           href="mailto:geethakrishna.designer@gmail.com" 
-          className="group relative px-8 py-5 rounded-full bg-[var(--color-accent)] text-white font-sans font-medium text-sm md:text-lg flex items-center gap-3 overflow-hidden max-w-full"
+          className="group relative px-8 py-5 rounded-full bg-[var(--color-accent)] text-[#0B0B0F] font-sans font-medium text-sm md:text-lg flex items-center gap-3 overflow-hidden max-w-full"
         >
           <span className="relative z-10 truncate">geethakrishna.designer@gmail.com</span>
           <ArrowUpRight className="w-5 h-5 relative z-10 flex-shrink-0 group-hover:rotate-45 transition-transform duration-300" />

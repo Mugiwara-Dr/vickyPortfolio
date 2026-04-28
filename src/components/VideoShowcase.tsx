@@ -196,7 +196,7 @@ export default function VideoShowcase() {
                       className="w-24 h-24 rounded-full flex items-center justify-center backdrop-blur-xl cursor-pointer hover:scale-110 transition-transform border"
                       style={{ backgroundColor: `${p.accent}22`, borderColor: `${p.accent}55` }}
                     >
-                      <Play className="w-10 h-10 fill-white ml-1" style={{ color: p.accent }} />
+                      <Play className="w-10 h-10 ml-1" style={{ color: p.accent, fill: p.accent }} />
                     </div>
                   </div>
                 )}
@@ -255,7 +255,7 @@ export default function VideoShowcase() {
                       onClick={() => navigate(i)}
                       className={`group w-full text-left flex items-center gap-6 py-2 transition-all ${active ? "opacity-100" : "opacity-30 hover:opacity-60"}`}
                     >
-                      <span className="text-[10px] font-mono font-bold tracking-widest" style={{ color: active ? proj.accent : "rgba(139,92,246,0.6)" }}>{String(i + 1).padStart(2, "0")}</span>
+                      <span className="text-[10px] font-mono font-bold tracking-widest" style={{ color: active ? proj.accent : `${proj.accent}99` }}>{String(i + 1).padStart(2, "0")}</span>
                       <span className={`text-sm font-sans uppercase tracking-widest ${active ? "font-black text-white" : "font-medium text-white/60"}`}>{proj.title}</span>
                     </button>
                   );
