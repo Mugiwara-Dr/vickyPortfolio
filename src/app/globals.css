@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #0A0A0A; /* Charcoal/Black */
+  --color-foreground: #F5F3FF;
+  --color-accent: #8B5CF6;    /* Electric Violet */
+  --color-accent-dim: rgba(139, 92, 246, 0.1);
+  --color-muted: #64748B;
+  --color-surface: #121212;   /* Charcoal Surface */
+  --color-soft: #A78BFA;      /* Lavender soft */
+  
+  --font-serif: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+:root {
+  --background: #0A0A0A;
+  --foreground: #F5F3FF;
+  --accent: #8B5CF6;
+  --accent-soft: #A78BFA;
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    /* Subtle earthy texture/gradient for the body */
+    background-image: radial-gradient(circle at 50% 0%, rgba(232, 124, 62, 0.05) 0%, transparent 70%);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1a1814;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #38352d;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #E87C3E;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px rgba(232, 124, 62, 0.5);
+  }
+  .bg-glow {
+    box-shadow: 0 0 40px rgba(232, 124, 62, 0.15);
+  }
+  
+  .rpg-border {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+  }
+}
