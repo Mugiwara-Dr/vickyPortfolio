@@ -28,6 +28,7 @@ export default function CharacterSheet() {
   const rightRef   = useRef<HTMLDivElement>(null);
   const barsRef    = useRef<HTMLDivElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
+  const colorImgRef = useRef<HTMLImageElement>(null);
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
@@ -52,16 +53,23 @@ export default function CharacterSheet() {
         });
       });
 
-      // ── Parallax Mouse Move for Dossier Photo
+      // ── FLASHLIGHT Reveal for Dossier
       const handleMouseMove = (e: MouseEvent) => {
         if (!imgWrapperRef.current) return;
-        const { left, top, width, height } = imgWrapperRef.current.getBoundingClientRect();
-        const x = (e.clientX - left) / width - 0.5;
-        const y = (e.clientY - top) / height - 0.5;
+        const rect = imgWrapperRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         
+        if (colorImgRef.current) {
+          colorImgRef.current.style.maskImage = `radial-gradient(circle 100px at ${x}px ${y}px, black 0%, transparent 100%)`;
+          colorImgRef.current.style.webkitMaskImage = `radial-gradient(circle 100px at ${x}px ${y}px, black 0%, transparent 100%)`;
+        }
+
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
         gsap.to(".dossier-img", {
-          x: x * 25,
-          y: y * 25,
+          x: px * 20,
+          y: py * 20,
           duration: 1.2,
           ease: "power2.out"
         });
@@ -85,47 +93,36 @@ export default function CharacterSheet() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
 
-        {/* Left Column: BETTER Technical Dossier Card */}
         <div ref={leftRef} className="lg:col-span-5 space-y-12">
           <div 
             ref={imgWrapperRef}
-            className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-[#0D0D0D] border border-white/5 group cursor-none shadow-2xl perspective-1000"
+            className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-[#000] border border-white/5 group shadow-2xl"
           >
-            {/* Technical Corner Markers */}
-            <div className="absolute top-6 left-6 w-4 h-4 border-t border-l border-white/20 group-hover:border-[var(--color-accent)] transition-colors z-20" />
-            <div className="absolute top-6 right-6 w-4 h-4 border-t border-r border-white/20 group-hover:border-[var(--color-accent)] transition-colors z-20" />
-            <div className="absolute bottom-6 left-6 w-4 h-4 border-b border-l border-white/20 group-hover:border-[var(--color-accent)] transition-colors z-20" />
-            <div className="absolute bottom-6 right-6 w-4 h-4 border-b border-r border-white/20 group-hover:border-[var(--color-accent)] transition-colors z-20" />
-
             <div className="dossier-img absolute inset-0 w-[115%] h-[115%] -left-[7.5%] -top-[7.5%]">
+              {/* B&W Base */}
               <img 
                 src="/blackwhite.jpeg" 
-                alt="Geetha Krishna B&W" 
-                className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:opacity-0" 
+                alt="B&W" 
+                className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale" 
               />
+              {/* Flashlight Color Reveal */}
               <img 
+                ref={colorImgRef}
                 src="/color.jpeg" 
-                alt="Geetha Krishna Color" 
-                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-all duration-1000" 
+                alt="Color" 
+                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ maskImage: "none", WebkitMaskImage: "none" }}
               />
             </div>
             
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90 group-hover:opacity-40 transition-opacity duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent opacity-90" />
             
-            <div className="absolute bottom-0 left-0 right-0 p-10 z-20">
+            <div className="absolute bottom-0 left-0 right-0 p-10 z-20 pointer-events-none">
                <div className="flex justify-between items-end border-t border-white/10 pt-6">
                   <div>
-                    <h3 className="text-3xl font-serif font-bold text-white tracking-tight group-hover:text-[var(--color-accent)] transition-colors">Geetha Krishna</h3>
+                    <h3 className="text-3xl font-serif font-bold text-white tracking-tight">Geetha Krishna</h3>
                     <p className="font-mono text-white/30 text-[9px] font-bold tracking-[0.4em] mt-3 uppercase">Subject ID: GK-2025-V4</p>
                   </div>
-                  <div className="text-4xl font-serif font-black text-white/10 italic">22</div>
-               </div>
-            </div>
-
-            {/* Custom Technical Cursor (Subtle) */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30">
-               <div className="absolute w-10 h-10 border border-[var(--color-accent)]/50 rounded-full flex items-center justify-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <div className="w-1 h-1 bg-[var(--color-accent)] rounded-full" />
                </div>
             </div>
           </div>
@@ -135,14 +132,12 @@ export default function CharacterSheet() {
                 <ChevronRight className="w-3 h-3" /> Origin Summary
              </div>
              <p className="text-white/40 font-serif text-xl leading-relaxed">
-                A creative engineer merging the precision of <span className="text-white">Instructional Design</span> with the soul of cinematic storytelling. 4 years of visual evolution.
+                A creative engineer merging the precision of <span className="text-white">Instructional Design</span> with the soul of cinematic storytelling.
              </p>
           </div>
         </div>
 
-        {/* Right Column: Attribute Matrix & Inventory */}
         <div ref={rightRef} className="lg:col-span-7 space-y-20">
-          
           <div ref={barsRef} className="space-y-12">
             <h4 className="font-mono text-[10px] font-bold tracking-[0.5em] uppercase text-white/20 border-b border-white/5 pb-6">Attribute Matrix</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
@@ -188,7 +183,6 @@ export default function CharacterSheet() {
                </a>
             </div>
           </div>
-
         </div>
       </div>
     </section>
